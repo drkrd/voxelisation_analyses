@@ -3,24 +3,19 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-vxfile <- as.data.frame(read.csv("D:/1_Work/1_Aigoual/svr_0_10_vox.vox", 
+vxfile <- as.data.frame(read.csv("D:/1_Work/2_Ciron/voxelisation/1_6_2/10.vox", 
                                  na.strings = NaN, skip = 5, sep = ""))
 
 
-vxfile_smry <- vxfile %>% 
-  select(c(1,2,3,4)) %>%
-  group_by(k) %>%
-  drop_na() %>% 
-  summarise(m = mean(PadBVTotal, na.rm = TRUE)) %>% 
-  ungroup()
-  
-ggplot(data = vxfile_smry, aes(x=k1, y=m))+geom_line()+coord_flip()
+# vxfile_smry <- vxfile %>% 
+#   select(c(1,2,3,4)) %>%
+#   group_by(k) %>%
+#   drop_na() %>% 
+#   summarise(m = mean(PadBVTotal, na.rm = TRUE)) %>% 
+#   ungroup()
+#   
+# ggplot(data = vxfile_smry, aes(x=k1, y=m))+geom_line()+coord_flip()
 
-
-func_index <- function(v)
-{
-  which(!is.na)
-}
 
 vxfile_smry <- vxfile %>% 
   select(c(1,2,3,4)) %>%
@@ -31,4 +26,4 @@ vxfile_smry <- vxfile %>%
   summarise(m=mean(PadBVTotal, na.rm = TRUE)) %>% 
   ungroup()
 
-  
+ggplot(data = vxfile_smry, aes(x=k1, y=m))+geom_line()+coord_flip()  
